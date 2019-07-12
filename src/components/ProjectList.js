@@ -16,7 +16,7 @@ export default function (props) {
                 projectLeadRole={p.projectLeadRole}
                 projectName={p.projectName}
                 projectDescription={p.projectDescription}
-                previewImage={p.previewImage}
+                previewImageUrl={p.previewImageUrl}
                 rolesNeeded={p.rolesNeeded}
                 contactInfo={p.contactInfo}
                 updateProjectList={props.updateProjectList}

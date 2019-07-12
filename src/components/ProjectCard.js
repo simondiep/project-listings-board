@@ -22,7 +22,7 @@ export default class ProjectCard extends Component {
         />
         <CardMedia
           className="ProjectCardImage"
-          image={this.props.previewImage ? this.props.previewImage : "/default_preview_image.png"}
+          image={this.props.previewImageUrl ? this.props.previewImageUrl : "/default_preview_image.png"}
           title="Preview Image"
         />
         <CardContent className="ProjectCardContent">
@@ -53,7 +53,7 @@ ProjectCard.propTypes = {
   projectLeadRole: PropTypes.string.isRequired,
   projectName: PropTypes.string.isRequired,
   projectDescription: PropTypes.string.isRequired,
-  previewImage: PropTypes.string,
+  previewImageUrl: PropTypes.string,
   rolesNeeded: PropTypes.array.isRequired,
   contactInfo: PropTypes.object.isRequired
 };

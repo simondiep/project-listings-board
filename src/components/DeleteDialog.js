@@ -22,14 +22,14 @@ export default class DeleteDialog extends React.Component {
   };
 
   handleClickDelete = (e) => {
-    this.setState({ dialogOpen: false });
     fetch(`${STORAGE_URL}?projectId=${this.props.projectId}`, {
       method: "DELETE",
     })
-      .then(response => response.json())
-      .then(jsonResponse => {
-        this.props.updateProjectList(jsonResponse.projects);
-      });
+    .then(response => response.json())
+    .then(jsonResponse => {
+      this.props.updateProjectList(jsonResponse.projects);
+    });
+    this.setState({ dialogOpen: false });
   }
 
   render() {

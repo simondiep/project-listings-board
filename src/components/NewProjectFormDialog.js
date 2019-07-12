@@ -79,21 +79,6 @@ export default class NewProjectFormDialog extends React.Component {
     });
   };
 
-  getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
-
-  onPreviewImageChange = (e) => {
-    this.getBase64(e.target.files[0]).then((base64Image) => {
-      this.setState({ formFields: { ...this.state.formFields, previewImage: base64Image } });
-    });
-  }
-
   render() {
     return (
       <div>
@@ -172,17 +157,13 @@ export default class NewProjectFormDialog extends React.Component {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Button
-                  variant="contained"
-                  component="label"
-                >
-                  Upload Preview Image
-                  <input
-                    type="file"
-                    style={{ display: "none" }}
-                    onChange={this.onPreviewImageChange}
-                  />
-                </Button>
+                <TextField
+                  fullWidth
+                  required
+                  id="previewImageUrl"
+                  label="Link to your Preview Image"
+                  onChange={e => this.onFormChange("previewImageUrl", e)}
+                />
               </Grid>
             </Grid>
           </DialogContent>
