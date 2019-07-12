@@ -45,7 +45,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>RrowdForge</h1>
+        <h1>Project Listings Board</h1>
         <NewProjectFormDialogButton
           updateProjectList={this.updateProjectList}
         />

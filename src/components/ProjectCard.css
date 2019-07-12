@@ -1,0 +1,16 @@
+.ProjectCard {
+  max-width: 345px;
+}
+
+.ProjectCardHeader {
+  height: 80px;
+}
+
+.ProjectCardImage {
+  height: 194px;
+  width: 345px;
+}
+
+.ProjectCardContent {
+  height: 100px;
+}
