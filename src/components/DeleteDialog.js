@@ -5,8 +5,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { STORAGE_URL } from "../Constants";
 
-export default class JoinFormDialog extends React.Component {
+export default class DeleteDialog extends React.Component {
   constructor(props) {
     super(props);
     this.state = { dialogOpen: false };
@@ -20,44 +21,43 @@ export default class JoinFormDialog extends React.Component {
     this.setState({ dialogOpen: false });
   };
 
-  showContactInfo = () => {
-    const hasDiscord = this.props.contactInfo.discordChannelUrl;
-    if (hasDiscord) {
-      return (
-        <p>
-          {"Discord: "}
-          <a href={hasDiscord}>{hasDiscord}</a>
-        </p>
-      );
-    }
-    return null;
-  };
+  handleClickDelete = (e) => {
+    fetch(`${STORAGE_URL}?projectId=${this.props.projectId}`, {
+      method: "DELETE",
+    })
+    .then(response => response.json())
+    .then(jsonResponse => {
+      this.props.updateProjectList(jsonResponse.projects);
+    });
+    this.setState({ dialogOpen: false });
+  }
 
   render() {
     return (
       <div>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={this.handleClickOpen}
         >
-          Join
+          Delete
         </Button>
         <Dialog
           open={this.state.dialogOpen}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Contact Info</DialogTitle>
+          <DialogTitle>Delete Project</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Awesome! Here is how you can get in touch with the project lead.
-              {this.showContactInfo()}
+              {`Are you sure you want to delete ${this.props.projectName}?`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="secondary">
-              Close
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={this.handleClickDelete} color="secondary">
+              Delete
             </Button>
           </DialogActions>
         </Dialog>

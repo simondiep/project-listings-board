@@ -50,7 +50,7 @@ class App extends Component {
           updateProjectList={this.updateProjectList}
         />
         <h2>Projects in need of help</h2>
-        <ProjectList projects={this.state.projects} />
+        <ProjectList projects={this.state.projects} updateProjectList={this.updateProjectList} />
       </div>
     );
   }

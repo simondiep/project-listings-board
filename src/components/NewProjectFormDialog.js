@@ -67,8 +67,6 @@ export default class NewProjectFormDialog extends React.Component {
   onFormChange = (fieldName, event) => {
     let newFieldName = fieldName;
     let newValue = event.target.value;
-    // TODO map rolesNeeded into array from comma separated string
-    // TODO map discordChannelUrl into object from contactInfo.discordChannelUrl
     if (fieldName === "rolesNeeded") {
       newValue = newValue.split(",");
     } else if (fieldName === "discordChannelUrl") {
@@ -158,10 +156,19 @@ export default class NewProjectFormDialog extends React.Component {
                   onChange={e => this.onFormChange("discordChannelUrl", e)}
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
+                  id="previewImageUrl"
+                  label="Link to your Preview Image"
+                  onChange={e => this.onFormChange("previewImageUrl", e)}
+                />
+              </Grid>
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleSubmitDummyData} color="gray">
+            <Button onClick={this.handleSubmitDummyData} color="default">
               Dummy Data
             </Button>
             <Button onClick={this.handleClose} color="secondary">
