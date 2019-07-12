@@ -1,7 +1,7 @@
 {
   "name": "project-listings-board",
   "version": "1.0.0",
-  "homepage": "http://simondiep.github.io/project-listings-board",
+  "homepage": "https://simondiep.github.io/project-listings-board/",
   "description": "",
   "keywords": [],
   "main": "src/index.js",
