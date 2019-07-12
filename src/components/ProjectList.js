@@ -18,6 +18,7 @@ export default function(props) {
                     projectDescription={p.projectDescription}
                     rolesNeeded={p.rolesNeeded}
                     contactInfo={p.contactInfo}
+                    updateProjectList={props.updateProjectList}
                   />
                 </Grid>
             );

@@ -25,7 +25,7 @@ export default class JoinFormDialog extends React.Component {
     if (hasDiscord) {
       return (
         <p>
-          Discord:
+          {"Discord: "}
           <a href={hasDiscord}>{hasDiscord}</a>
         </p>
       );
@@ -51,7 +51,7 @@ export default class JoinFormDialog extends React.Component {
           <DialogTitle id="form-dialog-title">Contact Info</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Awesome! Here is how you can get in touch with the project lead:
+              Awesome! Here is how you can get in touch with the project lead.
               {this.showContactInfo()}
             </DialogContentText>
           </DialogContent>
