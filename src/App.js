@@ -15,7 +15,7 @@ class App extends Component {
       .then(response => response.json())
       .then(jsonResponse =>
         this.setState({
-          projects: jsonResponse.projects
+          projects: jsonResponse
         })
       );
   };
@@ -37,7 +37,7 @@ class App extends Component {
     this.setState({ errorMessage: JSON.stringify(error + info) });
   }
 
-  handleClickOpen = () => {};
+  handleClickOpen = () => { };
 
   render() {
     if (this.state.hasError) {
