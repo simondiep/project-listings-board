@@ -6,12 +6,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Grid from "@material-ui/core/Grid";
 import { STORAGE_URL } from "../Constants";
 
 export default class NewProjectFormDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { dialogOpen: false };
+    this.state = { dialogOpen: false, formFields: {} };
   }
 
   handleClickOpen = () => {
@@ -30,15 +31,30 @@ export default class NewProjectFormDialog extends React.Component {
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       },
+      body: JSON.stringify(this.state.formFields)
+    })
+      .then(response => response.json())
+      .then(jsonResponse => {
+        this.props.updateProjectList(jsonResponse.projects);
+      });
+  };
+
+  // TODO delete this after testing
+  handleSubmitDummyData = () => {
+    this.setState({ dialogOpen: false });
+    fetch(STORAGE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
       body: JSON.stringify({
-        projectLeadId: "nathaniel",
-        projectLeadRole: "developer",
-        projectName: "Operation Dumbbell",
-        projectDescription:
-          "Game where you drop dumbbells out of a plane into the hands of bodybuilders",
-        rolesNeeded: ["developer", "designer"],
+        projectLeadId: "pop123",
+        projectLeadRole: "composer",
+        projectName: "Final Fantasy Background Music",
+        projectDescription: "Making some sweet tunes for a fan-made FF game.",
+        rolesNeeded: ["guitarist", "drummer", "pianist"],
         contactInfo: {
-          discordChannelUrl: "https://discord.gg/zmJGF6f"
+          discordChannelUrl: "https://discord.gg/music"
         }
       })
     })
@@ -46,6 +62,23 @@ export default class NewProjectFormDialog extends React.Component {
       .then(jsonResponse => {
         this.props.updateProjectList(jsonResponse.projects);
       });
+  };
+
+  onFormChange = (fieldName, event) => {
+    let newFieldName = fieldName;
+    let newValue = event.target.value;
+    // TODO map rolesNeeded into array from comma separated string
+    // TODO map discordChannelUrl into object from contactInfo.discordChannelUrl
+    if (fieldName === "rolesNeeded") {
+      newValue = newValue.split(",");
+    } else if (fieldName === "discordChannelUrl") {
+      newFieldName = "contactInfo";
+      newValue = { discordChannelUrl: newValue };
+    }
+
+    this.setState({
+      formFields: { ...this.state.formFields, [newFieldName]: newValue }
+    });
   };
 
   render() {
@@ -69,16 +102,68 @@ export default class NewProjectFormDialog extends React.Component {
               Awesome! You have an idea and want some help. Fill out this form
               to get started.
             </DialogContentText>
-            <TextField
-              autoFocus
-              id="emailAddress"
-              label="Email Address"
-              type="email"
-            />
-            <br />
-            <TextField autoFocus id="role" label="Your Role" />
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <TextField
+                  autoFocus
+                  required
+                  id="projectLeadId"
+                  label="Email Address"
+                  type="email"
+                  onChange={e => this.onFormChange("projectLeadId", e)}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  required
+                  id="projectLeadRole"
+                  label="Your Role"
+                  onChange={e => this.onFormChange("projectLeadRole", e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
+                  id="projectName"
+                  label="Project Name"
+                  onChange={e => this.onFormChange("projectName", e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  multiline
+                  required
+                  id="projectDescription"
+                  label="Description"
+                  onChange={e => this.onFormChange("projectDescription", e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
+                  id="rolesNeeded"
+                  label="List the roles you need for this project, separated by commas"
+                  onChange={e => this.onFormChange("rolesNeeded", e)}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  required
+                  id="discordChannelUrl"
+                  label="URL to your Discord Channel"
+                  onChange={e => this.onFormChange("discordChannelUrl", e)}
+                />
+              </Grid>
+            </Grid>
           </DialogContent>
           <DialogActions>
+            <Button onClick={this.handleSubmitDummyData} color="gray">
+              Dummy Data
+            </Button>
             <Button onClick={this.handleClose} color="secondary">
               Cancel
             </Button>

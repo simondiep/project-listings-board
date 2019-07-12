@@ -21,7 +21,6 @@ export default class ProjectCard extends Component {
 }
 
 ProjectCard.propTypes = {
-  id: PropTypes.string.isRequired,
   projectLeadId: PropTypes.string.isRequired,
   projectLeadRole: PropTypes.string.isRequired,
   projectName: PropTypes.string.isRequired,

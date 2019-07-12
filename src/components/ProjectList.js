@@ -8,7 +8,6 @@ export default function(props) {
       {props.projects.map(p => {
         return (
           <ProjectCard
-            id={p.id}
             projectLeadId={p.projectLeadId}
             projectLeadRole={p.projectLeadRole}
             projectName={p.projectName}
