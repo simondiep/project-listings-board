@@ -9,7 +9,7 @@ export default function (props) {
       <Grid container justify="center" spacing={2}>
         {props.projects.map(p => {
           return (
-            <Grid key={p.projectName} item>
+            <Grid key={p.projectName + p.creationDate} item>
               <ProjectCard
                 projectId={p.projectId}
                 projectLeadId={p.projectLeadId}
