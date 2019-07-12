@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Project.css";
 import PropTypes from "prop-types";
+import JoinFormDialog from "./JoinFormDialog";
 
 export default class ProjectCard extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class ProjectCard extends Component {
           Looking for:
           {this.props.rolesNeeded.map(r => " " + r + ", ")}
         </h3>
+        <JoinFormDialog contactInfo={this.props.contactInfo} />
       </div>
     );
   }
