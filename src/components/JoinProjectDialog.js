@@ -12,12 +12,19 @@ export default class JoinFormDialog extends React.Component {
     this.state = { dialogOpen: false };
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevProps.dialogOpen && this.props.dialogOpen && !this.state.dialogOpen) {
+      this.setState({ dialogOpen: true });
+    }
+  }
+
   handleClickOpen = () => {
     this.setState({ dialogOpen: true });
   };
 
   handleClose = () => {
     this.setState({ dialogOpen: false });
+    this.props.onJoinDialogClosed();
   };
 
   showContactInfo = () => {
@@ -35,33 +42,24 @@ export default class JoinFormDialog extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={this.handleClickOpen}
-        >
-          Join
-        </Button>
-        <Dialog
-          open={this.state.dialogOpen}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Contact Info</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Awesome! Here is how you can get in touch with the project lead.
-              {this.showContactInfo()}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="secondary">
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
+      <Dialog
+        open={this.state.dialogOpen}
+        onClose={this.handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Contact Info</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Awesome! Here is how you can get in touch with the project lead.
+            {this.showContactInfo()}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="secondary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }

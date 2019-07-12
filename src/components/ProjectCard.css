@@ -14,3 +14,7 @@
 .ProjectCardContent {
   height: 100px;
 }
+
+.ProjectCardRoleChip {
+  margin: 3px;
+}
