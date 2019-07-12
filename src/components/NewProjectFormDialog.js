@@ -67,8 +67,6 @@ export default class NewProjectFormDialog extends React.Component {
   onFormChange = (fieldName, event) => {
     let newFieldName = fieldName;
     let newValue = event.target.value;
-    // TODO map rolesNeeded into array from comma separated string
-    // TODO map discordChannelUrl into object from contactInfo.discordChannelUrl
     if (fieldName === "rolesNeeded") {
       newValue = newValue.split(",");
     } else if (fieldName === "discordChannelUrl") {
@@ -80,6 +78,21 @@ export default class NewProjectFormDialog extends React.Component {
       formFields: { ...this.state.formFields, [newFieldName]: newValue }
     });
   };
+
+  getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  onPreviewImageChange = (e) => {
+    this.getBase64(e.target.files[0]).then((base64Image) => {
+      this.setState({ formFields: { ...this.state.formFields, previewImage: base64Image } });
+    });
+  }
 
   render() {
     return (
@@ -158,10 +171,23 @@ export default class NewProjectFormDialog extends React.Component {
                   onChange={e => this.onFormChange("discordChannelUrl", e)}
                 />
               </Grid>
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  component="label"
+                >
+                  Upload Preview Image
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={this.onPreviewImageChange}
+                  />
+                </Button>
+              </Grid>
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleSubmitDummyData} color="gray">
+            <Button onClick={this.handleSubmitDummyData} color="default">
               Dummy Data
             </Button>
             <Button onClick={this.handleClose} color="secondary">
