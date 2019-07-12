@@ -25,10 +25,10 @@ export default class DeleteDialog extends React.Component {
     fetch(`${STORAGE_URL}?projectId=${this.props.projectId}`, {
       method: "DELETE",
     })
-    .then(response => response.json())
-    .then(jsonResponse => {
-      this.props.updateProjectList(jsonResponse.projects);
-    });
+      .then(response => response.json())
+      .then(jsonResponse => {
+        this.props.updateProjectList(jsonResponse);
+      });
     this.setState({ dialogOpen: false });
   }
 

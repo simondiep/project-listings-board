@@ -35,7 +35,7 @@ export default class NewProjectFormDialog extends React.Component {
     })
       .then(response => response.json())
       .then(jsonResponse => {
-        this.props.updateProjectList(jsonResponse.projects);
+        this.props.updateProjectList(jsonResponse);
       });
   };
 
@@ -60,7 +60,7 @@ export default class NewProjectFormDialog extends React.Component {
     })
       .then(response => response.json())
       .then(jsonResponse => {
-        this.props.updateProjectList(jsonResponse.projects);
+        this.props.updateProjectList(jsonResponse);
       });
   };
 
