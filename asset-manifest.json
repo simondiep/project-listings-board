@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/project-listings-board/static/css/main.665d8dda.chunk.css",
-    "main.js": "/project-listings-board/static/js/main.14749eb7.chunk.js",
-    "main.js.map": "/project-listings-board/static/js/main.14749eb7.chunk.js.map",
+    "main.js": "/project-listings-board/static/js/main.95551dd3.chunk.js",
+    "main.js.map": "/project-listings-board/static/js/main.95551dd3.chunk.js.map",
     "runtime~main.js": "/project-listings-board/static/js/runtime~main.6ec5ea55.js",
     "runtime~main.js.map": "/project-listings-board/static/js/runtime~main.6ec5ea55.js.map",
     "static/js/2.f18b225f.chunk.js": "/project-listings-board/static/js/2.f18b225f.chunk.js",
     "static/js/2.f18b225f.chunk.js.map": "/project-listings-board/static/js/2.f18b225f.chunk.js.map",
     "index.html": "/project-listings-board/index.html",
-    "precache-manifest.923f268bfb303c2a5b8d29d3d2a06270.js": "/project-listings-board/precache-manifest.923f268bfb303c2a5b8d29d3d2a06270.js",
+    "precache-manifest.bffd8407024de1cc662dd07ee9ec437d.js": "/project-listings-board/precache-manifest.bffd8407024de1cc662dd07ee9ec437d.js",
     "service-worker.js": "/project-listings-board/service-worker.js",
     "static/css/main.665d8dda.chunk.css.map": "/project-listings-board/static/css/main.665d8dda.chunk.css.map"
   }
