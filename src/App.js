@@ -1,22 +1,28 @@
 import React, { Component } from "react";
 import ProjectList from "./components/ProjectList";
 import NewProjectFormDialogButton from "./components/NewProjectFormDialog";
+import Filter from "./components/Filter";
 import { STORAGE_URL } from "./Constants";
 import "./styles.css";
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, errorMessage: "", projects: [] };
+    this.state = { hasError: false, errorMessage: "", projects: [],
+    rolesNeeded: [],
+    projectLeadRoles: [] };
   }
 
   componentDidMount = () => {
     fetch(STORAGE_URL)
       .then(response => response.json())
-      .then(jsonResponse =>
+      .then(jsonResponse => {
+        const newRolesNeeded = jsonResponse.map(project => project.rolesNeeded).filter((value, index, self) => self.indexOf(value) === index);
         this.setState({
-          projects: jsonResponse
-        })
+          projects: jsonResponse,
+          rolesNeeded: newRolesNeeded,
+          projectLeadRoles: jsonResponse.map(project => project.projectLeadRole).filter((value, index, self) => self.indexOf(value) === index),
+        })}
       );
   };
 
@@ -25,6 +31,14 @@ class App extends Component {
       projects
     });
   };
+
+  updateFilters = filters => {
+    console.log("this is")
+    console.log(this)
+    this.setState({
+      filters: filters
+    });
+  }
 
   static getDerivedStateFromError(error) {
     // Update state so the next render will show the fallback UI.
@@ -49,11 +63,10 @@ class App extends Component {
         <NewProjectFormDialogButton
           updateProjectList={this.updateProjectList}
         />
+        <Filter updateFilters={this.updateFilters} rolesNeeded={this.state.rolesNeeded} projectLeadRoles={this.state.projectLeadRoles} />
         <h2>Projects in need of help</h2>
-        <ProjectList projects={this.state.projects} updateProjectList={this.updateProjectList} />
+        <ProjectList projects={this.state.projects} rolesNeeded={this.state.rolesNeeded} projectLeadRoles={this.state.projectLeadRoles} updateProjectList={this.updateProjectList} />
       </div>
     );
   }
 }
-
-export default App;
