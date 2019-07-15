@@ -5,9 +5,20 @@ This web app will make it easier to coordinate projects, by allowing you to post
 
 ![preview](./preview.png)
 
+## Project Info
+
 This started as a 24 hour Hackathon project with @nathanielbd, on July 12, 2019
 
-## Additional feature ideas
+Built with Create-React-App and Webtask as the backend and storage.
+
+### Current Features
+
+- Post new project
+- Upload preview image
+- Join project by role (to see contact info)
+- Delete project
+
+### Additional feature ideas
 
 - Log In
 - SSO with Github

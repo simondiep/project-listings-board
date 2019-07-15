@@ -39,31 +39,6 @@ export default class NewProjectFormDialog extends React.Component {
       });
   };
 
-  // TODO delete this after testing
-  handleSubmitDummyData = () => {
-    this.setState({ dialogOpen: false });
-    fetch(STORAGE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8"
-      },
-      body: JSON.stringify({
-        projectLeadId: "pop123",
-        projectLeadRole: "composer",
-        projectName: "Final Fantasy Background Music",
-        projectDescription: "Making some sweet tunes for a fan-made FF game.",
-        rolesNeeded: ["guitarist", "drummer", "pianist"],
-        contactInfo: {
-          discordChannelUrl: "https://discord.gg/music"
-        }
-      })
-    })
-      .then(response => response.json())
-      .then(jsonResponse => {
-        this.props.updateProjectList(jsonResponse);
-      });
-  };
-
   onFormChange = (fieldName, event) => {
     let newFieldName = fieldName;
     let newValue = event.target.value;
@@ -168,9 +143,6 @@ export default class NewProjectFormDialog extends React.Component {
             </Grid>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleSubmitDummyData} color="default">
-              Dummy Data
-            </Button>
             <Button onClick={this.handleClose} color="secondary">
               Cancel
             </Button>
